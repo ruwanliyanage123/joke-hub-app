@@ -1,11 +1,21 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const router = useRouter();
+
+  const navigateToCreateJoke = () => {
+    router.push("/create-joke");
+  };
+
+  const navigateToReadJoke = () => {
+    router.push("/read-joke");
+  };
+
   return (
     <>
       <Head>
@@ -17,8 +27,22 @@ export default function Home() {
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
           <div className={styles.buttons}>
-            <button className={styles.button}>Read Joke</button>
-            <button className={styles.button}>Create Joke</button>
+            <button
+              className={styles.button}
+              onClick={() => {
+                navigateToReadJoke();
+              }}
+            >
+              Read Joke
+            </button>
+            <button
+              className={styles.button}
+              onClick={() => {
+                navigateToCreateJoke();
+              }}
+            >
+              Create Joke
+            </button>
           </div>
         </div>
       </main>
