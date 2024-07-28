@@ -16,6 +16,13 @@ export default function CreateJoke() {
       jokeDescription: description,
     };
     createJoke(jokeData);
+    clearForm();
+  };
+
+  const clearForm = () => {
+    setTitle("");
+    setType("");
+    setDescription("");
   };
 
   return (

@@ -3,7 +3,7 @@ import axios from "axios";
 export const createJoke = async (jokeData) => {
   try {
     const response = await axios.post(
-      "http://localhost:3001/api/createJoke",
+      "http://localhost:3001/joke-submit/createJoke",
       jokeData
     );
     console.log("Joke submitted successfully...", response.data);
@@ -15,7 +15,7 @@ export const createJoke = async (jokeData) => {
 export const getJokeByTitle = async (jokeData) => {
   try {
     const response = await axios.get(
-      `http://localhost:3001/api/getRandomJokeByType/${jokeData}`
+      `http://localhost:3005/joke-deliver/getRandomJokeByType/${jokeData}`
     );
     console.log("Joke submitted successfully...", response.data);
     return response.data;
@@ -28,7 +28,7 @@ export const getJokeByTitle = async (jokeData) => {
 export const getActiveTypes = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:3001/api/getActiveTypes"
+      "http://localhost:3001/joke-submit/getActiveTypes"
     );
     return response.data;
   } catch (error) {
