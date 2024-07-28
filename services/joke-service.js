@@ -1,24 +1,26 @@
 import axios from "axios";
-const BASE_URL = "https://localhost:3001/api/";
-const POST_URL = `${BASE_URL}createJoke`;
-const GET_ALL_URL = `${BASE_URL}getAllJokes`;
-const GET_BY_ID_URL = `${BASE_URL}getJokeById:id`;
 
-export const createJoke = async (formData) => {
+export const createJoke = async (jokeData) => {
   try {
-    const response = await axios.post("http://localhost:3001/api/createJoke", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(jokeData),
-    });
-    if (response.ok) {
-      console.log("Joke submitted successfully");
-    } else {
-      console.error("Failed to submit joke");
-    }
+    const response = await axios.post(
+      "http://localhost:3001/api/createJoke",
+      jokeData
+    );
+    console.log("Joke submitted successfully...", response.data);
   } catch (error) {
     console.error("Error submitting joke:", error);
+  }
+};
+
+export const getJokeByTitle = async (jokeData) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3001/api/getRandomJokeByType/${jokeData}`
+    );
+    console.log("Joke submitted successfully...", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error submitting joke:", error);
+    return null;
   }
 };

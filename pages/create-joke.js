@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import styles from "../styles/CreateJoke.module.css";
-import axios from "axios";
+import { createJoke } from "../services/joke-service";
 
 export default function CreateJoke() {
   const [description, setDescription] = useState("");
@@ -15,15 +15,7 @@ export default function CreateJoke() {
       jokeType: type,
       jokeDescription: description,
     };
-    try {
-      const response = await axios.post(
-        "http://localhost:3001/api/createJoke",
-        jokeData
-      );
-      console.log("Joke submitted successfully...", response.data);
-    } catch (error) {
-      console.error("Error submitting joke:", error);
-    }
+    createJoke(jokeData);
   };
 
   return (
@@ -51,7 +43,7 @@ export default function CreateJoke() {
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
-              value={title} // Added value attribute to bind state
+              value={title}
             />
           </div>
           <div className={styles.formGroup}>
