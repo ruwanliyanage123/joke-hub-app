@@ -24,3 +24,15 @@ export const getJokeByTitle = async (jokeData) => {
     return null;
   }
 };
+
+export const getActiveTypes = async () => {
+  try {
+    const response = await axios.get(
+      "http://localhost:3001/api/getActiveTypes"
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error getting joke types:", error);
+    return null;
+  }
+};

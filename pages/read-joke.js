@@ -1,11 +1,20 @@
 import styles from "../styles/ReadJoke.module.css";
-import { getJokeByTitle } from "../services/joke-service";
-import { useState } from "react";
+import { getJokeByTitle, getActiveTypes } from "../services/joke-service";
+import { useEffect, useState } from "react";
 
 export default function ReadJoke() {
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
+  const [activeTypes, setActiveTypes] = useState([]);
+
+  useEffect(() => {
+    const getActiveJokesTypes = async () => {
+      const types = await getActiveTypes();
+      setActiveTypes(types);
+    };
+    getActiveJokesTypes();
+  }, []);
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
@@ -34,16 +43,12 @@ export default function ReadJoke() {
               }}
               value={type}
             >
-              <option value="amare">Select category</option>
-              <option value="political">Political</option>
-              <option value="cricket">Cricket</option>
-              <option value="film">Film</option>
-              <option value="it">IT</option>
-              <option value="kids">Kids</option>
-              <option value="office">Office</option>
-              <option value="home">Home</option>
-              <option value="gym">Gym</option>
-              <option value="school">School</option>
+              <option value="">Select category</option>
+              {activeTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
             </select>
             <label htmlFor="jokeType" className={styles.label}>
               Enter your favourite Joke Category
