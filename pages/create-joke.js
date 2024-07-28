@@ -3,19 +3,33 @@ import Head from "next/head";
 import styles from "../styles/CreateJoke.module.css";
 
 export default function CreateJoke() {
-  const [image, setImage] = useState(null);
+  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
+  const [type, setType] = useState("");
 
-  const handleImageUpload = (e) => {
-    setImage(e.target.files[0]);
-  };
-
-  const handleDrop = (e) => {
+  const handlerSubmit = async (e) => {
     e.preventDefault();
-    setImage(e.dataTransfer.files[0]);
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
+    const jokeData = {
+      jokeTitle: title, // Corrected to use state variables
+      jokeType: type,
+      jokeDescription: description,
+    };
+    try {
+      const response = await fetch("http://localhost:3001/api/createJoke", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jokeData),
+      });
+      if (response.ok) {
+        console.log("Joke submitted successfully");
+      } else {
+        console.error("Failed to submit joke");
+      }
+    } catch (error) {
+      console.error("Error submitting joke:", error);
+    }
   };
 
   return (
@@ -29,23 +43,34 @@ export default function CreateJoke() {
       </Head>
       <div className={styles.container}>
         <h1 className={styles.title}>Create a New Joke</h1>
-        <form className={styles.form}>
+        <form onSubmit={handlerSubmit} className={styles.form}>
           <div className={styles.formGroup}>
-            <label htmlFor="jokeName" className={styles.label}>
-              Joke Name
+            <label htmlFor="jokeTitle" className={styles.label}>
+              Joke Title
             </label>
             <input
               type="text"
-              id="jokeName"
+              id="jokeTitle"
               className={styles.input}
-              placeholder="Enter joke name"
+              placeholder="Enter joke title"
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+              value={title} // Added value attribute to bind state
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="jokeCategory" className={styles.label}>
+            <label htmlFor="jokeType" className={styles.label}>
               Joke Category
             </label>
-            <select id="jokeCategory" className={styles.select}>
+            <select
+              id="jokeType"
+              className={styles.select}
+              onChange={(e) => {
+                setType(e.target.value);
+              }}
+              value={type}
+            >
               <option value="">Select category</option>
               <option value="funny">Funny</option>
               <option value="pun">Pun</option>
@@ -54,33 +79,16 @@ export default function CreateJoke() {
             </select>
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="description" className={styles.label}>
+            <label htmlFor="jokeDescription" className={styles.label}>
               Description
             </label>
             <textarea
-              id="description"
+              id="jokeDescription"
               className={styles.textarea}
               placeholder="Enter joke description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             ></textarea>
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Image</label>
-            <div
-              className={styles.dropArea}
-              onDrop={handleDrop}
-              onDragOver={handleDragOver}
-            >
-              <input
-                type="file"
-                className={styles.fileInput}
-                onChange={handleImageUpload}
-              />
-              {image ? (
-                <p>{image.name}</p>
-              ) : (
-                <p>Drag and drop an image here, or click to select one</p>
-              )}
-            </div>
           </div>
           <button type="submit" className={styles.button}>
             Submit
