@@ -51,7 +51,7 @@ export default function Home() {
           <div className={styles.background}></div>
           <Container maxWidth="sm" className={styles.content}>
             <Typography variant="h2" component="h1" gutterBottom>
-              Get a Joke
+              Are you kidding me?
             </Typography>
             <Typography variant="h5" component="h2" gutterBottom>
               Choose an option below
@@ -60,17 +60,23 @@ export default function Home() {
               <Button
                 variant="contained"
                 color="primary"
-                sx={{ marginRight: 2 }}
+                sx={{
+                  marginRight: 2,
+                  borderRadius: "80px",
+                  backgroundColor: "black",
+                }}
                 onClick={navigateToReadJoke}
               >
-                Read Joke
+                Read Jokes
               </Button>
               <Button
                 variant="contained"
                 color="secondary"
+                className="create-button"
+                sx={{ borderRadius: "80px", backgroundColor: "black" }}
                 onClick={navigateToCreateJoke}
               >
-                Create Joke
+                write Jokes
               </Button>
             </Box>
           </Container>
