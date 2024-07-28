@@ -10,7 +10,7 @@ export default function CreateJoke() {
   const handlerSubmit = async (e) => {
     e.preventDefault();
     const jokeData = {
-      jokeTitle: title, // Corrected to use state variables
+      jokeTitle: title,
       jokeType: type,
       jokeDescription: description,
     };
@@ -50,6 +50,7 @@ export default function CreateJoke() {
             </label>
             <input
               type="text"
+              required
               id="jokeTitle"
               className={styles.input}
               placeholder="Enter joke title"
@@ -65,6 +66,7 @@ export default function CreateJoke() {
             </label>
             <select
               id="jokeType"
+              required
               className={styles.select}
               onChange={(e) => {
                 setType(e.target.value);
@@ -72,10 +74,15 @@ export default function CreateJoke() {
               value={type}
             >
               <option value="">Select category</option>
-              <option value="funny">Funny</option>
-              <option value="pun">Pun</option>
-              <option value="dad">Dad Joke</option>
-              <option value="knock-knock">Knock-Knock</option>
+              <option value="political">Political</option>
+              <option value="cricket">Cricket</option>
+              <option value="film">Film</option>
+              <option value="it">IT</option>
+              <option value="kids">Kids</option>
+              <option value="office">Office</option>
+              <option value="home">Home</option>
+              <option value="gym">Gym</option>
+              <option value="school">School</option>
             </select>
           </div>
           <div className={styles.formGroup}>
@@ -84,6 +91,7 @@ export default function CreateJoke() {
             </label>
             <textarea
               id="jokeDescription"
+              required
               className={styles.textarea}
               placeholder="Enter joke description"
               value={description}
