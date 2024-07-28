@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 import { Button, Container, Typography, Box } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import styles from "@/styles/Home.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,31 +47,34 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ThemeProvider theme={theme}>
-        <Container maxWidth="sm" sx={{ textAlign: "center", marginTop: 8 }}>
-          <Typography variant="h2" component="h1" gutterBottom>
-            Get a Joke
-          </Typography>
-          <Typography variant="h5" component="h2" gutterBottom>
-            Choose an option below
-          </Typography>
-          <Box sx={{ marginTop: 4 }}>
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{ marginRight: 2 }}
-              onClick={navigateToReadJoke}
-            >
-              Read Joke
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={navigateToCreateJoke}
-            >
-              Create Joke
-            </Button>
-          </Box>
-        </Container>
+        <div className={styles.main}>
+          <div className={styles.background}></div>
+          <Container maxWidth="sm" className={styles.content}>
+            <Typography variant="h2" component="h1" gutterBottom>
+              Get a Joke
+            </Typography>
+            <Typography variant="h5" component="h2" gutterBottom>
+              Choose an option below
+            </Typography>
+            <Box sx={{ marginTop: 4 }}>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ marginRight: 2 }}
+                onClick={navigateToReadJoke}
+              >
+                Read Joke
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={navigateToCreateJoke}
+              >
+                Create Joke
+              </Button>
+            </Box>
+          </Container>
+        </div>
       </ThemeProvider>
     </>
   );
