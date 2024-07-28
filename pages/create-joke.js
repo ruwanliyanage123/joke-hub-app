@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import styles from "../styles/CreateJoke.module.css";
+import axios from "axios";
 
 export default function CreateJoke() {
   const [description, setDescription] = useState("");
@@ -15,18 +16,11 @@ export default function CreateJoke() {
       jokeDescription: description,
     };
     try {
-      const response = await fetch("http://localhost:3001/api/createJoke", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(jokeData),
-      });
-      if (response.ok) {
-        console.log("Joke submitted successfully");
-      } else {
-        console.error("Failed to submit joke");
-      }
+      const response = await axios.post(
+        "http://localhost:3001/api/createJoke",
+        jokeData
+      );
+      console.log("Joke submitted successfully...", response.data);
     } catch (error) {
       console.error("Error submitting joke:", error);
     }
