@@ -1,7 +1,38 @@
 import React, { useState } from "react";
 import Head from "next/head";
-import styles from "../styles/CreateJoke.module.css";
-import { createJoke } from "../services/joke-service";
+import {
+  Container,
+  Typography,
+  Box,
+  TextField,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+  Button,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#556cd6",
+    },
+    secondary: {
+      main: "#19857b",
+    },
+    error: {
+      main: "#ff4400",
+    },
+    background: {
+      default: "#f0f0f0",
+    },
+  },
+  typography: {
+    fontFamily: "Inter, Arial",
+  },
+});
 
 export default function CreateJoke() {
   const [description, setDescription] = useState("");
@@ -15,7 +46,8 @@ export default function CreateJoke() {
       jokeType: type,
       jokeDescription: description,
     };
-    createJoke(jokeData);
+    // Your createJoke function call here
+    // await createJoke(jokeData);
     clearForm();
   };
 
@@ -34,68 +66,90 @@ export default function CreateJoke() {
           content="Create a new joke and share it with the world!"
         />
       </Head>
-      <div className={styles.container}>
-        <h1 className={styles.title}>Create a New Joke</h1>
-        <form onSubmit={handlerSubmit} className={styles.form}>
-          <div className={styles.formGroup}>
-            <label htmlFor="jokeTitle" className={styles.label}>
-              Joke Title
-            </label>
-            <input
-              type="text"
-              required
-              id="jokeTitle"
-              className={styles.input}
-              placeholder="Enter joke title"
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-              value={title}
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label htmlFor="jokeType" className={styles.label}>
-              Joke Category
-            </label>
-            <select
-              id="jokeType"
-              required
-              className={styles.select}
-              onChange={(e) => {
-                setType(e.target.value);
-              }}
-              value={type}
-            >
-              <option value="">Select category</option>
-              <option value="political">Political</option>
-              <option value="cricket">Cricket</option>
-              <option value="film">Film</option>
-              <option value="it">IT</option>
-              <option value="kids">Kids</option>
-              <option value="office">Office</option>
-              <option value="home">Home</option>
-              <option value="gym">Gym</option>
-              <option value="school">School</option>
-            </select>
-          </div>
-          <div className={styles.formGroup}>
-            <label htmlFor="jokeDescription" className={styles.label}>
-              Description
-            </label>
-            <textarea
-              id="jokeDescription"
-              required
-              className={styles.textarea}
-              placeholder="Enter joke description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            ></textarea>
-          </div>
-          <button type="submit" className={styles.button}>
-            Submit
-          </button>
-        </form>
-      </div>
+      <ThemeProvider theme={theme}>
+        <Box
+          sx={{
+            backgroundImage: "url(/createjoke.jpg)", // Replace with your image path
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Container
+            maxWidth="sm"
+            sx={{
+              backgroundColor: "rgba(255, 255, 255, 0.6)", // White background with opacity
+              borderRadius: "12px",
+              padding: "2rem",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Shadow for better look
+              backdropFilter: "blur(5px)", // Apply blur to the container
+              position: "relative",
+            }}
+          >
+            <Typography variant="h4" component="h1" gutterBottom>
+              Create a New Joke
+            </Typography>
+            <form onSubmit={handlerSubmit}>
+              <FormControl fullWidth margin="normal">
+                <TextField
+                  label="Joke Title"
+                  variant="outlined"
+                  required
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </FormControl>
+              <FormControl fullWidth margin="normal">
+                <InputLabel id="jokeType-label">Joke Category</InputLabel>
+                <Select
+                  labelId="jokeType-label"
+                  id="jokeType"
+                  required
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                  label="Joke Category"
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value="political">Political</MenuItem>
+                  <MenuItem value="cricket">Cricket</MenuItem>
+                  <MenuItem value="film">Film</MenuItem>
+                  <MenuItem value="it">IT</MenuItem>
+                  <MenuItem value="kids">Kids</MenuItem>
+                  <MenuItem value="office">Office</MenuItem>
+                  <MenuItem value="home">Home</MenuItem>
+                  <MenuItem value="gym">Gym</MenuItem>
+                  <MenuItem value="school">School</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl fullWidth margin="normal">
+                <TextField
+                  id="jokeDescription"
+                  label="Description"
+                  variant="outlined"
+                  required
+                  multiline
+                  rows={4}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </FormControl>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                sx={{ borderRadius: "80px", backgroundColor: "black" }}
+              >
+                Create
+              </Button>
+            </form>
+          </Container>
+        </Box>
+      </ThemeProvider>
     </>
   );
 }

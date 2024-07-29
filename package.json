@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "submit-jokes": "node scripts/data-collection-script.js"
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",
@@ -15,6 +16,7 @@
     "@mui/material": "^5.16.5",
     "axios": "^1.7.2",
     "next": "14.2.5",
+    "node-fetch": "^2.7.0",
     "react": "^18",
     "react-dom": "^18"
   },

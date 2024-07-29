@@ -87,15 +87,15 @@ export default function ReadJoke() {
               left: 0,
               width: "100%",
               height: "100%",
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              filter: "blur(8px)",
+              backgroundColor: "rgba(0, 0, 0, 0.3)",
+              filter: "blur(5px)",
               zIndex: -1,
             }}
           />
           <Container
             maxWidth="sm"
             sx={{
-              backgroundColor: "rgba(255, 255, 255, 0.8)", // White background with opacity
+              backgroundColor: "rgba(255, 255, 255, 0.2)", // White background with opacity
               borderRadius: "12px",
               padding: "2rem",
               boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Add some shadow for a nicer look
@@ -104,12 +104,19 @@ export default function ReadJoke() {
               zIndex: 1,
             }}
           >
-            <Typography variant="h3" component="h1" gutterBottom>
+            <Typography
+              variant="h3"
+              component="h1"
+              gutterBottom
+              sx={{ color: "white" }}
+            >
               Read a Joke
             </Typography>
             <Box component="form" onSubmit={handlerSubmit} sx={{ mt: 3 }}>
               <FormControl fullWidth sx={{ mb: 2 }}>
-                <InputLabel id="jokeType-label">Select category</InputLabel>
+                <InputLabel sx={{ color: "white" }} id="jokeType-label">
+                  Select category
+                </InputLabel>
                 <Select
                   labelId="jokeType-label"
                   id="jokeType"
@@ -117,6 +124,7 @@ export default function ReadJoke() {
                   value={type}
                   label="Select category"
                   onChange={(e) => setType(e.target.value)}
+                  sx={{ color: "white" }}
                 >
                   <MenuItem value=""></MenuItem>
                   {activeTypes.map((type) => (
@@ -138,11 +146,11 @@ export default function ReadJoke() {
                   background: "black",
                 }}
               >
-                get a joke
+                get
               </Button>
             </Box>
             {title && (
-              <Box sx={{ mt: 4 }}>
+              <Box sx={{ mt: 4, color: "white" }}>
                 <Typography variant="h5" component="h2" gutterBottom>
                   {title}
                 </Typography>
