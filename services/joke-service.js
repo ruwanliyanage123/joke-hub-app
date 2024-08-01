@@ -1,8 +1,7 @@
+import config from "../config";
 import axios from "axios";
-import dotenv from "dotenv";
-dotenv.config();
-const DELIVER_URL = `${process.env.DELIVER_PROTOCOL}://${process.env.DELIVER_HOST}:${process.env.DELIVER_PORT}/joke-deliver`;
-const SUBMIT_URL = `${process.env.SUBMIT_PROTOCOL}://${process.env.SUBMIT_HOST}:${process.env.SUBMIT_PORT}/joke-submit`;
+const DELIVER_URL = `${config.DELIVER_PROTOCOL}://${config.DELIVER_HOST}:${config.DELIVER_PORT}/joke-deliver`;
+const SUBMIT_URL = `${config.SUBMIT_PROTOCOL}://${config.SUBMIT_HOST}:${config.SUBMIT_PORT}/joke-submit`;
 
 export const createJoke = async (jokeData) => {
   try {
@@ -16,7 +15,7 @@ export const createJoke = async (jokeData) => {
 export const getJokeByTitle = async (jokeData) => {
   try {
     const response = await axios.get(
-      `${DELIVER_UR}/getRandomJokeByType/${jokeData}`
+      `${DELIVER_URL}/getRandomJokeByType/${jokeData}`
     );
     console.log("Joke submitted successfully...", response.data);
     return response.data;

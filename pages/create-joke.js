@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Head from "next/head";
+import { createJoke } from "@/services/joke-service";
 import {
   Container,
   Typography,
@@ -46,8 +47,7 @@ export default function CreateJoke() {
       jokeType: type,
       jokeDescription: description,
     };
-    // Your createJoke function call here
-    // await createJoke(jokeData);
+    await createJoke(jokeData);
     clearForm();
   };
 
