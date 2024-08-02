@@ -46,9 +46,11 @@ chat gpt
 
 commands in aws ec2 instances
 
+```
 ssh -i "your-key.pem" ubuntu@your-instance-public-ip
 ssh -i "your-key.pem" -v ubuntu@xx.xxx.xxx.x
 scp -i path/to/your-key.pem -r /local/path/to/your-app ubuntu@ec2-public-dns:/remote/path
 zip filename.zip file.txt
 free -h
 df -h
+```
